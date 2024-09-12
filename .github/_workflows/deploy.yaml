@@ -1,0 +1,58 @@
+name: Deploy to Vultr Kubernetes
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_REGISTRY_USER }}
+          password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_REGISTRY_USER }}/${{ secrets.DOCKER_REPOSITORY }}:latest
+
+      - name: Install kubectl
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x ./kubectl
+          sudo mv ./kubectl /usr/local/bin/kubectl
+
+      - name: Configure Kubeconfig and restart Deployment
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
+        run: |
+          mkdir -p $HOME/.kube
+          echo "$KUBE_CONFIG_DATA" | base64 -d > $HOME/.kube/config
+
+      - name: Create Secrets and Deploy to Kubernetes
+        env:
+          IMAGE_NAME: cybercowboy13/magicresume:latest
+        run: |
+          kubectl delete secret my-app-secrets --ignore-not-found
+          kubectl create secret generic my-app-secrets \
+            --from-literal=DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} \
+            --from-literal=DOCKER_REPOSITORY=${{ secrets.DOCKER_REPOSITORY }} \
+            --from-literal=SUPABASE_URL=${{ secrets.SUPABASE_URL }} \
+            --from-literal=SUPABASE_KEY=${{ secrets.SUPABASE_KEY }} \
+            --from-literal=OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
+            --from-literal=CLAUDE_API_KEY=${{ secrets.CLAUDE_API_KEY }} \
+            --from-literal=STRIPE_SECRET=${{ secrets.STRIPE_SECRET }} \
+            --from-literal=STRIPE_SIGNING_SECRET=${{ secrets.STRIPE_SIGNING_SECRET }} \
+            --from-literal=SUPABASE_SERVICE=${{ secrets.SUPABASE_SERVICE }}
+          kubectl apply -f k8/deployment.yaml
+          kubectl apply -f k8/ingress.yaml
+          kubectl apply -f k8/service.yaml
+          kubectl rollout restart deployment/nuxt-app

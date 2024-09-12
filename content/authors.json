@@ -1,0 +1,25 @@
+{
+  "CyberCowboy404": {
+    "@context": "http://www.schema.org",
+    "@type": "Person",
+    "@id": "https://www.linkedin.com/in/nickolay-b-92589418b/",
+    "name": "Nikolas Bohdanov",
+    "alternateName": "CyberCowboy404",
+    "gender": "Male",
+    "jobTitle": "CEO",
+    "worksFor": [
+      {
+        "@type": "Organization",
+        "name": "Sample Organization",
+        "sameAs": [
+          "https://www.magic-resume.ai/"
+        ]
+      }
+    ],
+    "url": "https://www.linkedin.com/in/nickolay-b-92589418b/",
+    "image": "https://avatars.githubusercontent.com/u/65310868?v=4",
+    "sameAs": [
+      "https://www.linkedin.com/in/nickolay-b-92589418b/"
+    ]
+  }
+}

@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nuxt-app
+  labels:
+    app: nuxt-app
+spec:
+  replicas: 2 # Adjust as needed
+  selector:
+    matchLabels:
+      app: nuxt-app
+  template:
+    metadata:
+      labels:
+        app: nuxt-app
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: nuxt-app
+          image: cybercowboy13/magicresume:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000 # Or the port your Nuxt app uses
+          env:
+            - name: NUXT_PUBLIC_SUPABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secrets
+                  key: SUPABASE_URL
+
+            - name: NUXT_PUBLIC_SUPABASE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secrets
+                  key: SUPABASE_KEY
+
+            - name: NUXT_OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secrets
+                  key: OPENAI_API_KEY
+            - name: NUXT_CLAUDE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secrets
+                  key: CLAUDE_API_KEY
+            - name: NUXT_STRIPE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secrets
+                  key: STRIPE_SECRET
+            - name: NUXT_STRIPE_SIGNING_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secrets
+                  key: STRIPE_SIGNING_SECRET
+            - name: NUXT_SUPABASE_SERVICE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secrets
+                  key: SUPABASE_SERVICE
+            - name: NUXT_HOST
+              value: 0.0.0.0
+            - name: NUXT_PORT
+              value: '3000'
+            - name: NUXT_ENV
+              value: production
