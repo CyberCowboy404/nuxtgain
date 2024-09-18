@@ -129,7 +129,7 @@ export default defineNuxtConfig({
     }
   },
 
-  // Configure hydration delay
+  // To inreasy lighthouse results
   delayHydration: {
     mode: 'init',
   },
