@@ -22,7 +22,8 @@ image:
   height: 630
 ---
 
-![Magic Resume AI professional resume builder with AI-powered features for efficient and customized resume creation.](/blog/magic-resume-intro-post.webp)
+::img-content{width=1000 src="/blog/magic-resume-intro-post.webp" alt="Magic Resume AI professional resume builder with AI-powered features for efficient and customized resume creation."}
+::
 
 Creating a standout resume can be a daunting task, especially in today"s competitive job market. Enter **Magic Resume AI**, a cutting-edge tool designed to simplify and enhance the resume-building process. In this article, we"ll explore what Magic Resume AI is, how to use it, and what sets it apart from other resume services.
 
