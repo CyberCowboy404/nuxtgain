@@ -111,6 +111,7 @@ export default defineNuxtConfig({
     'nuxt-seo-experiments',
     'nuxt-schema-org',
     '@nuxtjs/device',
+    'nuxt-security'
   ],
 
   // Disable OG image generation due to build size limitations

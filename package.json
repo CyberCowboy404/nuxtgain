@@ -64,6 +64,7 @@
     "nuxt-link-checker": "3.0.0-rc.12",
     "nuxt-lodash": "^2.5.3",
     "nuxt-schema-org": "^3.4.0",
+    "nuxt-security": "^2.0.0",
     "nuxt-seo-experiments": "4.0.0-rc.9",
     "nuxt-svgo": "^4.0.6",
     "sass": "^1.79.1",
