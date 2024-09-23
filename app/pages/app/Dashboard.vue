@@ -1,7 +1,4 @@
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 const { t } = useI18n()
 const localePath = useLocalePath()
 useHead({ title: t('dashboard.pageTitle') })
@@ -9,12 +6,8 @@ useHead({ title: t('dashboard.pageTitle') })
 
 <template>
   <div class="dashboard container mx-auto px-4">
-    <section class="flex items-center justify-between border-b pb-4 border-neutral-300">
-      <TypographyText
-        :text="t('dashboard.yourResumes')"
-        size="22px"
-        class="text-neutral-400"
-      />
+    <section class="flex items-center justify-between border-b pb-4 border-neutral-300 text-neutral-400 font-xl">
+      Your items
     </section>
   </div>
 </template>
@@ -24,6 +17,7 @@ useHead({ title: t('dashboard.pageTitle') })
   tbody tr td:first-child {
     @apply text-brand-blue;
     text-decoration: underline;
+
     &:hover {
       text-decoration: none;
       @apply text-gray-500;

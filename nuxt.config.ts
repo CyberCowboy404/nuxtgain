@@ -263,9 +263,9 @@ export default defineNuxtConfig({
           warn(warning)
         }
       }
-    }
+    },
   },
 
   // Set compatibility date for Nuxt
-  compatibilityDate: '2024-07-24'
+  compatibilityDate: '2024-07-24',
 })

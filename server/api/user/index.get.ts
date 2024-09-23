@@ -2,7 +2,6 @@ import consola from 'consola'
 
 import { serverSupabaseClient, serverSupabaseUser } from '#supabase/server'
 import type { Database } from '~/types/supabase'
-import isUserPaid from '~/server/utils/isUserPaid'
 
 export default defineEventHandler(async (event) => {
   const log = consola.withTag('api:user:index.get')
