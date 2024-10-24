@@ -147,6 +147,11 @@ useHead({
               :value="doc"
               class="blog-content blog-post-text"
             />
+            <BlogRelatedArticles
+              :surround="data?.surround"
+              class="text-brand-blue font-bold"
+              :spacing="false"
+            />
           </article>
           <aside class="sticky mt-6 top-[85px] col-span-full md:col-span-3 blog-aside h-fit">
             <!-- Mobile Table of Content -->

@@ -3,14 +3,24 @@ defineProps({
   surround: {
     type: Array,
     required: true
-  }
+  },
+  spacing: {
+    type: Boolean,
+    default: true,
+  },
 })
 </script>
 
 <template>
   <div>
     <span class="blog-aside-title mb-2 block">Continue Reading</span>
-    <ul class="list-none ml-4">
+    <ul
+      class="list-none"
+      :class="{
+        'ml-4': spacing,
+        'p-0 m-0': !spacing,
+      }"
+    >
       <template
         v-for="(other, index) in surround"
         :key="index"
