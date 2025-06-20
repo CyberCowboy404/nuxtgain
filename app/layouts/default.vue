@@ -6,5 +6,6 @@
     <!-- </div> -->
     <LandingFooter />
     <ContactFeedback />
+    <GdprConsent />
   </div>
 </template>
